@@ -31,10 +31,21 @@ class App extends Component {
     })
   }
 
+  // non-redux way of passing state between components! addProject={this.handleAddProject}
+  // still runs in AddProject.js, NOT here. Function is passed as a first class object
+  handleAddProject = (project) => {
+    // get current list of projects
+    let projects = this.state.projects
+    // add new project
+    projects.push(project)
+    // update state
+    this.setState({ projects: projects })
+  }
+
   render() {
     return (
       <div className="App">
-        <AddProject />
+        <AddProject addProject={this.handleAddProject}/>
         <Projects projects={this.state.projects}/>
       </div>
     );
